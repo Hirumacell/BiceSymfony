@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des véhicules{% endblock %}
+
+{% block body %}
+<div class="container">
+    <br>
+    <h1>Intervention : {{ data2.nom }}</h1>
+    <br>
+    <h5>Description : {{ data2.description }}</h5>
+    <h5>Date : {{ data2.date_intervention }}</h5>
+    <br>
+    <h1>Liste des véhicules utilisées</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">nom</th>
+            <th scope="col">immatriculation</th>
+            <th scope="col">numero_interne</th>
+            <th scope="col">details</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in data %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.nom }}</td>
+                <td>{{ item.immatriculation }}</td>
+                <td>{{ item.numero_interne }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('MaterielVehicule', {'idInter': idInter, 'idVehicule':item.id}) }}" role="button">Voir le materiel</a>
+                    <a class="btn btn-primary" href="{{ path('RetourIntervention', {'idInter': idInter, 'idVehicule':item.id}) }}" role="button">Retour d'intervention</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

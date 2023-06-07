@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BICE WebClient{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Retour d'intervention</h1>
+        <form action="{{ path('RetourInterventionForm') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Intervention</label>
+                <select class="form-control" id="exampleFormControlSelect1" aria-label="Select intervention" disabled>
+                    <option value="{{ data2.id }}">{{ data2.nom }}</option>
+                </select>
+                <input name="interventionid" type="text" class="form-control" value="{{ data2.id }}" hidden readonly>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Vehicule</label>
+                <select class="form-control" id="exampleFormControlSelect2"  aria-label="Select vehicule" disabled>
+                    <option value="{{ data3.id }}">{{ data3.nom }}</option>
+                </select>
+                <input name="vehiculeid" type="text" class="form-control" value="{{ data3.id }}" hidden readonly>
+            </div>
+            <div class="form-group">
+                <label for="file1">Materiel Utilisé :</label>
+                <input type="file" class="form-control" id="file1" name="file1" required>
+            </div>
+            <div class="form-group">
+                <label for="file1">Materiel Non-Utilisé :</label>
+                <input type="file" class="form-control" id="file2" name="file2" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de materiel{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h1>Intervention : {{ data2.nom }}</h1>
+        <h2>Vehicule : {{ data3.nom }}</h2>
+        <br>
+
+        {% if data is empty %}
+            <h3 class="text-center">En attente du retour d'intervention</h3>
+        {% else %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">nom</th>
+                    <th scope="col">code_barre</th>
+                    <th scope="col">categorie</th>
+                    <th scope="col">nbr_utilisation</th>
+                    <th scope="col">nbr_utilisation_max</th>
+                    <th scope="col">date_expiration</th>
+                    <th scope="col">date_controle</th>
+                    <th scope="col">perdu ?</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.nom }}</td>
+                        <td>{{ item.code_barre }}</td>
+                        <td>{{ item.categorie }}</td>
+                        <td>{{ item.nbr_utilisation }}</td>
+                        <td>
+                            {% if item.nbr_utilisation_max == "0" %}
+                                N/A
+                            {% else %}
+                                {{ item.nbr_utilisation_max }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item.date_expiration != '0001-01-01T00:00:00' %}
+                                {{ item.date_expiration|date('Y-m-d') }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if item.date_controle != '0001-01-01T00:00:00' %}
+                                {{ item.date_controle|date('Y-m-d H:i:s') }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td>{{ item.perdu }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+
+{% endblock %}

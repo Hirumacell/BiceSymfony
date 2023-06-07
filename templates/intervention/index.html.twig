@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BICE WebClient{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <a class="btn btn-primary" href="{{ path('AjoutIntervention') }}" role="button">Créer une intervention</a>
+        <br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">titre</th>
+                <th scope="col">date d'intervention</th>
+                <th scope="col">Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.nom }}</td>
+                    <td>{{ item.date_intervention|date('d-m-Y') }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('vehicule_en_intervention', { 'id': item.id }) }}" role="button">Gerer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BICE WebClient{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Créer une intervention</h1>
+        <form action="{{ path('AjoutIntervention') }}" method="POST">
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" class="form-control" id="nom" name="nom" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description :</label>
+                <textarea class="form-control" id="description" name="description" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="date_intervention">Date_intervention:</label>
+                <input type="date" class="form-control" id="date_intervention" name="date_intervention" required>
+            </div>
+            <div>
+                <label>Avec quel véhicule ?</label>
+                {% for item in data %}
+                <div class="form-check">
+                    <input class="form-check-input" value="1" type="checkbox" name="{{ item.id }}">
+                    <label class="form-check-label" for="{{ item.id }}">
+                        {{ item.id }} . {{ item.nom }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </div>
+{% endblock %}
